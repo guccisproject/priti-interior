@@ -168,7 +168,7 @@
     var el = doc.getElementById('toast');
     if (!el) return;
     el.innerHTML = '<span>' + escapeHtml(message) + '</span>' +
-      (withCartLink ? '<a href="/cart.html">View cart</a>' : '');
+      (withCartLink ? '<a href="cart.html">View cart</a>' : '');
     el.classList.add('is-visible');
     clearTimeout(toastTimer);
     toastTimer = setTimeout(function () { el.classList.remove('is-visible'); }, 3600);
@@ -234,7 +234,7 @@
       if (!item) return;
       Cart.add(id, 1);
       toast(item.name + ' added to your cart.', true);
-      if (btn.hasAttribute('data-go-to-cart')) window.location.href = '/cart.html';
+      if (btn.hasAttribute('data-go-to-cart')) window.location.href = 'cart.html';
     });
   }
 
@@ -267,7 +267,7 @@
             '<ul class="check-list">' + c.includes.map(function (i) { return '<li>' + escapeHtml(i) + '</li>'; }).join('') + '</ul>' +
             '<div class="collection__actions">' +
               '<button class="btn" type="button" data-add-to-cart="' + c.id + '">Add to cart</button>' +
-              '<a class="btn btn--ghost" href="/contact.html?interest=' + encodeURIComponent(c.name) + '">Ask a question</a>' +
+              '<a class="btn btn--ghost" href="contact.html?interest=' + encodeURIComponent(c.name) + '">Ask a question</a>' +
             '</div>' +
           '</div>' +
         '</article>';
@@ -309,8 +309,8 @@
           diamondIcon() +
           '<h2>Your cart is empty</h2>' +
           '<p class="muted">Browse our design collections and individual services to begin.</p>' +
-          '<div class="btn-row" style="justify-content:center"><a class="btn" href="/services.html">View services</a>' +
-          '<a class="btn btn--ghost" href="/contact.html">Book a consultation</a></div>' +
+          '<div class="btn-row" style="justify-content:center"><a class="btn" href="services.html">View services</a>' +
+          '<a class="btn btn--ghost" href="contact.html">Book a consultation</a></div>' +
         '</div>';
       return;
     }
@@ -342,8 +342,8 @@
           '<div class="summary-row--total summary-row"><span>Total</span><strong>' + money(priced.subtotal) + '</strong></div>' +
           '<p class="muted mt-1" style="font-size:14px">Design services are billed as listed. Furnishings and materials are quoted and invoiced separately.' +
             (priced.retainerAllowed ? ' Orders of ' + money(Catalog.RETAINER_MIN) + ' or more can reserve with a 50% retainer at checkout.' : '') + '</p>' +
-          '<a class="btn btn--block mt-2" href="/checkout.html">Proceed to checkout</a>' +
-          '<a class="btn btn--ghost btn--block mt-1" href="/services.html">Continue browsing</a>' +
+          '<a class="btn btn--block mt-2" href="checkout.html">Proceed to checkout</a>' +
+          '<a class="btn btn--ghost btn--block mt-1" href="services.html">Continue browsing</a>' +
           secureNote() +
         '</aside>' +
       '</div>';
@@ -394,7 +394,7 @@
         '<div class="glass panel empty-state">' + diamondIcon() +
         '<h2>There is nothing to check out yet</h2>' +
         '<p class="muted">Add a collection or service to your cart first.</p>' +
-        '<div class="btn-row" style="justify-content:center"><a class="btn" href="/services.html">View services</a></div></div>';
+        '<div class="btn-row" style="justify-content:center"><a class="btn" href="services.html">View services</a></div></div>';
       return;
     }
 
@@ -423,7 +423,7 @@
           ? '<div class="summary-row"><span>Balance due at design presentation</span><strong>' + money(priced.balance) + '</strong></div>'
           : '') +
         '<div class="summary-row summary-row--total"><span>Due today</span><strong>' + money(priced.dueToday) + '</strong></div>' +
-        '<p class="mt-1"><a class="text-link" href="/cart.html">Edit cart</a></p>';
+        '<p class="mt-1"><a class="text-link" href="cart.html">Edit cart</a></p>';
     }
 
     planInputs.forEach(function (input) { input.addEventListener('change', renderSummary); });
@@ -458,7 +458,7 @@
       submit.textContent = 'Preparing secure checkout…';
       status.innerHTML = '';
 
-      postJSON('/api/checkout', payload)
+      postJSON('api/checkout', payload)
         .then(function (res) {
           if (res.url) {
             storageSet('priti_pending_order', { at: Date.now() });
@@ -468,7 +468,7 @@
           if (res.orderId) {
             storageSet('priti_last_order', { id: res.orderId, mode: res.mode, email: payload.customer.email });
             Cart.clear();
-            window.location.href = '/order-confirmation.html?order=' + encodeURIComponent(res.orderId);
+            window.location.href = 'order-confirmation.html?order=' + encodeURIComponent(res.orderId);
             return;
           }
           throw new Error(res.error || 'Unexpected response');
@@ -539,7 +539,7 @@
     if (sessionId) {
       Cart.clear();
       storageRemove('priti_pending_order');
-      fetch('/api/order-status?session_id=' + encodeURIComponent(sessionId))
+      fetch('api/order-status?session_id=' + encodeURIComponent(sessionId))
         .then(function (r) { return r.json(); })
         .then(function (res) {
           if (res.paid) {
@@ -587,7 +587,7 @@
       submit.disabled = true;
       submit.textContent = 'Sending…';
 
-      postJSON('/api/contact', data)
+      postJSON('api/contact', data)
         .then(function () {
           form.reset();
           status.innerHTML = '<div class="notice notice--success">Thank you, ' + escapeHtml(data.name.split(' ')[0]) +

@@ -209,6 +209,14 @@ const localBusiness = {
   areaServed: ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas']
 };
 
+// Use relative links so the site works both at a domain root and in a sub-folder
+// (e.g. https://user.github.io/priti-interior/ on GitHub Pages).
+function relativize(html) {
+  return html
+    .replace(/(href|src)="\/"/g, '$1="./"')
+    .replace(/(href|src)="\/(?!\/)/g, '$1="');
+}
+
 function build() {
   const files = fs.readdirSync(SRC).filter((f) => f.endsWith('.html'));
   for (const file of files) {
@@ -218,7 +226,7 @@ function build() {
     const meta = JSON.parse(match[1]);
     if (meta.nav === 'home') meta.schema = localBusiness;
     const body = raw.slice(match[0].length);
-    fs.writeFileSync(path.join(OUT, file), layout(meta, body, file));
+    fs.writeFileSync(path.join(OUT, file), relativize(layout(meta, body, file)));
     console.log('built', file);
   }
 }
