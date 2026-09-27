@@ -24,12 +24,12 @@ The cookie consent banner, header navigation (with cart) and footer are shared a
 ## How it fits together
 
 - `src/pages/*.html`: page content. Edit these, then run `npm run build`.
-- `build.js`: wraps each page with the shared layout and writes it to `public/`.
-- `public/`: the built site (committed, so it can be deployed as is).
-- `public/assets/js/catalog.js`: **all services, collections and prices**. Edit prices here. The server uses the same file, so customers can't change prices from the browser.
-- `public/assets/js/main.js`: navigation, sparkles, cart, checkout, contact form and cookie consent.
-- `public/assets/css/styles.css`: all styles.
-- `server.js`: a small Node server (no dependencies) that serves the site and handles checkout and the contact form.
+- `build.js`: wraps each page with the shared layout and writes the finished pages (`index.html`, `about.html`, …) to the repository root.
+- `*.html` in the root plus `assets/`: the built site (committed, so GitHub Pages can serve it as is).
+- `assets/js/catalog.js`: **all services, collections and prices**. Edit prices here. The server uses the same file, so customers can't change prices from the browser.
+- `assets/js/main.js`: navigation, sparkles, cart, checkout, contact form and cookie consent.
+- `assets/css/styles.css`: all styles.
+- `server.js`: a small Node server (no dependencies) that serves the site and handles checkout and the contact form. It only serves the site files, never its own code or data.
 
 ## Running locally
 
@@ -56,11 +56,13 @@ Submissions are saved to `data/inquiries.jsonl` and `data/orders.jsonl`. To rece
 
 ## Deploying
 
-Any host that runs Node works (Render, Railway, Fly.io, a VPS, etc.): run `npm start` with the environment variables above. Put it behind HTTPS (most hosts do this automatically).
+**GitHub Pages (free):** in Settings → Pages, choose *Deploy from a branch*, pick the site's branch and the `/ (root)` folder. The pages are already built, so no extra setup is needed. (Choosing *GitHub Actions* also works, using `.github/workflows/pages.yml`.) Card payments need the Node server, so on GitHub Pages checkout and the contact form fall back to a pre-filled email.
+
+**Node hosting (for Stripe payments):** Any host that runs Node works (Render, Railway, Fly.io, a VPS, etc.): run `npm start` with the environment variables above. Put it behind HTTPS (most hosts do this automatically).
 
 ## Images
 
-Photos are loaded from Unsplash under the [Unsplash License](https://unsplash.com/license), and photographers are credited on the Legal Notice page. Replace them with photos of your own projects when available: search for `images.unsplash.com` in `src/pages`, `catalog.js` and `styles.css` (background).
+Photos are loaded from Unsplash under the [Unsplash License](https://unsplash.com/license), and photographers are credited on the Legal Notice page. Replace them with photos of your own projects when available: search for `images.unsplash.com` in `src/pages`, `assets/js/catalog.js` and `assets/css/styles.css` (background), then run `npm run build`.
 
 ## Before launch
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /*
  * Tiny static build: wraps each page in src/pages with the shared layout
- * (head, header, footer, cookie banner) and writes it to public/.
+ * (head, header, footer, cookie banner) and writes it to the repository root.
  *
  * Each page starts with a meta comment:
  *   <!--meta {"title": "...", "description": "...", "nav": "home"} -->
@@ -12,7 +12,7 @@ const fs = require('fs');
 const path = require('path');
 
 const SRC = path.join(__dirname, 'src', 'pages');
-const OUT = path.join(__dirname, 'public');
+const OUT = __dirname; // built pages live in the repository root so GitHub Pages can serve them directly
 const SITE_URL = process.env.SITE_URL || 'https://priti-interior.com';
 // Cache-busting version derived from asset contents, so rebuilding unchanged assets yields identical pages.
 const ASSET_VERSION = require('crypto')

@@ -1,5 +1,6 @@
-# Publishes the built site in public/ to GitHub Pages.
-# In the repository settings, set Pages > Build and deployment > Source to "GitHub Actions".
+# Publishes the website to GitHub Pages when Pages > Source is set to "GitHub Actions".
+# (Not required when Source is "Deploy from a branch": the site files already sit in the repo root.)
+# Only the public website files are published, never server code or data.
 name: Deploy to GitHub Pages
 
 on:
@@ -28,9 +29,14 @@ jobs:
         with:
           node-version: 20
       - run: node build.js
+      - name: Collect public site files
+        run: |
+          mkdir _site
+          cp *.html robots.txt sitemap.xml .nojekyll _site/
+          cp -r assets _site/
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: public
+          path: _site
       - id: deployment
         uses: actions/deploy-pages@v4

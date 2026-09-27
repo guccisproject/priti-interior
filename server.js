@@ -2,7 +2,7 @@
 /*
  * Priti Interior — web server (no dependencies, Node 18+).
  *
- *  - Serves the static site in ./public
+ *  - Serves the static site (built pages in the repo root, plus ./assets)
  *  - POST /api/checkout      → Stripe Checkout Session (or a booking request if Stripe is not configured)
  *  - GET  /api/order-status  → confirms a Stripe Checkout Session after redirect
  *  - POST /api/contact       → stores contact inquiries (and emails them if configured)
@@ -16,12 +16,12 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
-const Catalog = require('./public/assets/js/catalog.js');
+const Catalog = require('./assets/js/catalog.js');
 
 loadDotEnv();
 
 const PORT = Number(process.env.PORT) || 3000;
-const PUBLIC_DIR = path.join(__dirname, 'public');
+const PUBLIC_DIR = __dirname;
 const DATA_DIR = path.join(__dirname, 'data');
 const STRIPE_KEY = process.env.STRIPE_SECRET_KEY || '';
 const NOTIFY_EMAIL = process.env.NOTIFY_EMAIL || 'contact@priti-interior.com';
@@ -386,8 +386,15 @@ function serveStatic(req, res, url) {
   if (pathname.endsWith('/')) pathname += 'index.html';
   if (!path.extname(pathname)) pathname += '.html'; // clean URLs: /about → /about.html
 
+  // The site shares the repo root with server code, so only serve public files:
+  // top-level pages (.html/.txt/.xml) and anything under /assets/.
+  const isPublic = /^\/[\w-]+\.(html|txt|xml)$/.test(pathname) || /^\/assets\/[\w\-./]+$/.test(pathname);
   const filePath = path.normalize(path.join(PUBLIC_DIR, pathname));
-  if (!filePath.startsWith(PUBLIC_DIR + path.sep)) return send(res, 403, 'Forbidden');
+  if (!isPublic || !filePath.startsWith(PUBLIC_DIR + path.sep) || filePath.includes(path.sep + '.')) {
+    return fs.readFile(path.join(PUBLIC_DIR, '404.html'), (e, html) =>
+      send(res, 404, e ? 'Not found' : html, { 'Content-Type': MIME['.html'] })
+    );
+  }
 
   fs.stat(filePath, (err, stat) => {
     if (err || !stat.isFile()) {
