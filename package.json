@@ -1,0 +1,16 @@
+{
+  "name": "priti-interior",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Website for Priti Interior LLC, Las Vegas interior design studio",
+  "main": "server.js",
+  "scripts": {
+    "build": "node build.js",
+    "start": "node server.js",
+    "dev": "node build.js && node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "UNLICENSED"
+}

@@ -1,0 +1,110 @@
+<!--meta {"title": "Checkout", "nav": "cart", "noindex": true, "description": "Secure checkout for Priti Interior design services."} -->
+    <section class="section">
+      <div class="container">
+        <div class="glass page-hero reveal" style="margin-bottom:clamp(20px,3vw,32px)">
+          <span class="eyebrow">Checkout</span>
+          <h1 class="mb-0">Reserve your design services</h1>
+        </div>
+
+        <div id="checkout-root" class="cart-layout">
+          <section class="glass panel" aria-labelledby="details-title">
+            <form class="form" id="checkout-form" novalidate>
+              <h2 id="details-title" style="font-size:30px">Your details</h2>
+              <div class="form-row">
+                <div class="field">
+                  <label for="k-name">Full name</label>
+                  <input id="k-name" name="name" type="text" autocomplete="name" required maxlength="120" data-error="Please enter your name.">
+                  <span class="error" aria-live="polite"></span>
+                </div>
+                <div class="field">
+                  <label for="k-company">Company <span class="faint">(commercial only)</span></label>
+                  <input id="k-company" name="company" type="text" autocomplete="organization" maxlength="120">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="field">
+                  <label for="k-email">Email</label>
+                  <input id="k-email" name="email" type="email" autocomplete="email" required maxlength="160" data-error="Please enter a valid email address.">
+                  <span class="error" aria-live="polite"></span>
+                </div>
+                <div class="field">
+                  <label for="k-phone">Phone</label>
+                  <input id="k-phone" name="phone" type="tel" autocomplete="tel" required maxlength="40" pattern="[0-9\s\(\)\+\.\-]{7,}" data-error="Please enter a valid phone number.">
+                  <span class="error" aria-live="polite"></span>
+                </div>
+              </div>
+
+              <h3 class="mt-2" style="font-size:24px">Project</h3>
+              <div class="field">
+                <label for="k-address">Project address</label>
+                <input id="k-address" name="address" type="text" autocomplete="street-address" required maxlength="200" data-error="Please enter the project address.">
+                <span class="error" aria-live="polite"></span>
+              </div>
+              <div class="form-row">
+                <div class="field">
+                  <label for="k-city">City</label>
+                  <input id="k-city" name="city" type="text" autocomplete="address-level2" required maxlength="80" value="Las Vegas" data-error="Please enter a city.">
+                  <span class="error" aria-live="polite"></span>
+                </div>
+                <div class="field">
+                  <label for="k-zip">ZIP code</label>
+                  <input id="k-zip" name="zip" type="text" inputmode="numeric" autocomplete="postal-code" required pattern="\d{5}(-\d{4})?" maxlength="10" data-error="Please enter a 5-digit ZIP code.">
+                  <span class="error" aria-live="polite"></span>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="field">
+                  <label for="k-type">Project type</label>
+                  <select id="k-type" name="projectType" required>
+                    <option>Residential</option>
+                    <option>Commercial</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="k-timeline">Preferred start</label>
+                  <select id="k-timeline" name="timeline" required>
+                    <option>As soon as possible</option>
+                    <option>Within 1 month</option>
+                    <option>1&ndash;3 months</option>
+                    <option>3+ months</option>
+                  </select>
+                </div>
+              </div>
+              <div class="field">
+                <label for="k-notes">Notes <span class="faint">(optional)</span></label>
+                <textarea id="k-notes" name="notes" maxlength="2000" style="min-height:110px" placeholder="Gate codes, rooms involved, scheduling preferences..."></textarea>
+              </div>
+
+              <h3 class="mt-2" style="font-size:24px">Payment</h3>
+              <div class="choice" role="radiogroup" aria-label="Payment option">
+                <label data-plan="full">
+                  <input type="radio" name="plan" value="full" checked>
+                  <span><strong>Pay in full</strong><small>Settle your design fee today.</small></span>
+                </label>
+                <label data-plan="retainer">
+                  <input type="radio" name="plan" value="retainer">
+                  <span><strong>50% design retainer</strong><small>Available on orders of $2,500 or more. The balance is invoiced at your design presentation.</small></span>
+                </label>
+              </div>
+
+              <div class="hp" aria-hidden="true">
+                <label for="k-website">Leave this field empty</label>
+                <input id="k-website" name="website" type="text" tabindex="-1" autocomplete="off">
+              </div>
+
+              <label class="checkbox mt-1" for="k-terms">
+                <input id="k-terms" name="terms" type="checkbox" required data-error="Please accept the terms to continue.">
+                <span>I have read and agree to the <a class="text-link" href="/terms.html" target="_blank" rel="noopener">Terms &amp; Conditions</a> and <a class="text-link" href="/refunds.html" target="_blank" rel="noopener">Cancellation &amp; Refund Policy</a>, and acknowledge the <a class="text-link" href="/privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.</span>
+              </label>
+              <span class="error" data-error-for="k-terms" aria-live="polite" style="font-size:13px;color:#ffb4b4"></span>
+
+              <button class="btn btn--block" type="submit">Continue to secure payment</button>
+              <div id="checkout-status" aria-live="polite"></div>
+              <div class="secure-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Card details are entered on Stripe&rsquo;s secure page and never touch our servers.</div>
+            </form>
+          </section>
+
+          <aside class="glass panel--sm panel" id="checkout-summary" aria-live="polite" style="position:sticky;top:calc(var(--header-h) + 40px)"></aside>
+        </div>
+      </div>
+    </section>

@@ -1,0 +1,108 @@
+<!--meta {"title": "Contact", "nav": "contact", "description": "Contact Priti Interior LLC in Las Vegas, NV. Call 702-744-7873 or email contact@priti-interior.com to arrange an interior design consultation."} -->
+    <section class="section">
+      <div class="container">
+        <div class="glass page-hero reveal">
+          <span class="eyebrow">Contact</span>
+          <h1>Let&rsquo;s begin a <em>conversation.</em></h1>
+          <p class="lead">Tell us a little about your space and what you have in mind. We reply to every inquiry within one business day.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cart-layout cart-layout--contact">
+          <aside class="glass panel reveal">
+            <span class="eyebrow">The Studio</span>
+            <ul class="contact-list">
+              <li><span class="label">Telephone</span><a href="tel:+17027447873">702-744-7873</a></li>
+              <li><span class="label">Email</span><a href="mailto:contact@priti-interior.com">contact@priti-interior.com</a></li>
+              <li><span class="label">Location</span><strong>Las Vegas, Nevada</strong><div class="muted" style="font-size:15px">Consultations held in your home or business, by appointment.</div></li>
+              <li><span class="label">Hours</span><strong>Mon&ndash;Fri, 9am&ndash;6pm</strong><div class="muted" style="font-size:15px">Saturday by appointment</div></li>
+            </ul>
+            <div class="divider"><span></span></div>
+            <p class="muted" style="font-size:15px">Ready to book? Consultations can be reserved and paid online.</p>
+            <a class="btn btn--ghost btn--block" href="/services.html">View services &amp; book</a>
+          </aside>
+
+          <section class="glass panel reveal" aria-labelledby="form-title">
+            <h2 id="form-title">Send an inquiry</h2>
+            <form class="form" id="contact-form" novalidate>
+              <div class="form-row">
+                <div class="field">
+                  <label for="c-name">Full name</label>
+                  <input id="c-name" name="name" type="text" autocomplete="name" required maxlength="120" data-error="Please enter your name.">
+                  <span class="error" aria-live="polite"></span>
+                </div>
+                <div class="field">
+                  <label for="c-email">Email</label>
+                  <input id="c-email" name="email" type="email" autocomplete="email" required maxlength="160" data-error="Please enter a valid email address.">
+                  <span class="error" aria-live="polite"></span>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="field">
+                  <label for="c-phone">Phone <span class="faint">(optional)</span></label>
+                  <input id="c-phone" name="phone" type="tel" autocomplete="tel" maxlength="40" pattern="[0-9\s\(\)\+\.\-]{7,}" data-error="Please enter a valid phone number.">
+                  <span class="error" aria-live="polite"></span>
+                </div>
+                <div class="field">
+                  <label for="c-interest">I&rsquo;m interested in</label>
+                  <select id="c-interest" name="interest" required data-error="Please choose an option.">
+                    <option value="">Select one</option>
+                    <option>Design consultation</option>
+                    <option>The Refresh</option>
+                    <option>The Signature Room</option>
+                    <option>The Residence</option>
+                    <option>The Estate</option>
+                    <option>Commercial Studio</option>
+                    <option>Commercial Suite</option>
+                    <option>E-Design</option>
+                    <option>Styling or procurement only</option>
+                    <option>Something else</option>
+                  </select>
+                  <span class="error" aria-live="polite"></span>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="field">
+                  <label for="c-type">Project type</label>
+                  <select id="c-type" name="projectType">
+                    <option>Residential</option>
+                    <option>Commercial</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="c-budget">Furnishings budget <span class="faint">(optional)</span></label>
+                  <select id="c-budget" name="budget">
+                    <option value="">Prefer not to say</option>
+                    <option>Under $15,000</option>
+                    <option>$15,000 &ndash; $40,000</option>
+                    <option>$40,000 &ndash; $100,000</option>
+                    <option>$100,000+</option>
+                  </select>
+                </div>
+              </div>
+              <div class="field">
+                <label for="c-message">Tell us about your space</label>
+                <textarea id="c-message" name="message" required minlength="10" maxlength="4000" placeholder="Rooms involved, timing, the feeling you are after..." data-error="Please add a short message (at least 10 characters)."></textarea>
+                <span class="error" aria-live="polite"></span>
+              </div>
+              <div class="hp" aria-hidden="true">
+                <label for="c-website">Leave this field empty</label>
+                <input id="c-website" name="website" type="text" tabindex="-1" autocomplete="off">
+              </div>
+              <label class="checkbox" for="c-consent">
+                <input id="c-consent" name="consent" type="checkbox" value="yes" required data-error="Please confirm so we can reply to you.">
+                <span>I agree that Priti Interior may use these details to respond to my inquiry, as described in the <a class="text-link" href="/privacy.html">Privacy Policy</a>.</span>
+              </label>
+              <span class="error" data-error-for="c-consent" aria-live="polite" style="font-size:13px;color:#ffb4b4"></span>
+              <div>
+                <button class="btn" type="submit">Send message</button>
+              </div>
+              <div id="contact-status" aria-live="polite"></div>
+            </form>
+          </section>
+        </div>
+      </div>
+    </section>
