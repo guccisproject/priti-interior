@@ -514,9 +514,9 @@
       ]).filter(function (l) { return l !== ''; }).join('\n');
 
     var href = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent('Booking request — ' + c.name) + '&body=' + encodeURIComponent(body);
-    status.innerHTML = '<div class="notice">Online payment is temporarily unavailable. ' +
-      'You can send this order to our studio and we will reply with a secure invoice within one business day.' +
-      '<div class="btn-row" style="margin-top:14px"><a class="btn btn--sm" href="' + href + '">Email my order</a>' +
+    status.innerHTML = '<div class="notice">Almost done. Send your booking to our studio and we will reply within one business day ' +
+      'with a secure payment link and available appointment times.' +
+      '<div class="btn-row" style="margin-top:14px"><a class="btn btn--sm" href="' + href + '">Send my booking</a>' +
       '<a class="btn btn--ghost btn--sm" href="tel:+17027447873">Call 702-744-7873</a></div></div>';
   }
 
@@ -598,8 +598,8 @@
             var body = 'Name: ' + data.name + '\nEmail: ' + data.email + '\nPhone: ' + (data.phone || '') +
               '\nInterest: ' + data.interest + '\nBudget: ' + (data.budget || '') + '\n\n' + data.message;
             var href = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent('Inquiry from ' + data.name) + '&body=' + encodeURIComponent(body);
-            status.innerHTML = '<div class="notice">Our form is briefly unavailable. <a class="text-link" href="' + href +
-              '">Send your message by email</a> and it will reach us directly.</div>';
+            status.innerHTML = '<div class="notice">One last step: <a class="text-link" href="' + href +
+              '">tap here to send your message</a>. It opens your email app with everything filled in, and we will reply within one business day.</div>';
           } else {
             status.innerHTML = '<div class="notice notice--error">' + escapeHtml((err && err.message) || 'Something went wrong.') + '</div>';
           }
